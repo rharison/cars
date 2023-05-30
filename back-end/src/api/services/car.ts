@@ -1,7 +1,12 @@
-import { Car } from '../../types/car'
+import { Car } from '@/types/car'
 import CarModel from '@models/car'
+import { validateDataCreateCar } from '@validation/car'
+import { v4 as uuidV4 } from 'uuid'
 
 export async function create(car: Car) {
+  validateDataCreateCar(car)
+  const id = uuidV4()
+  car.id = id
   const newCar = await CarModel.create(car)
 
   return newCar
