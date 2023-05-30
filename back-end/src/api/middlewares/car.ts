@@ -36,7 +36,26 @@ export const hasCar = async (req: Request, res: Response, next: NextFunction) =>
   }
 }
 
+export const alreadyExists = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { placa, chassi } = req.body
+
+    await CarService.getByPlacaOrChassi(placa, chassi)
+
+    next()
+  } catch (error: any) {
+    const { code, fields, message } = error
+
+    return res.status(code).json({
+      message,
+      fields
+    })
+  }
+
+}
+
 export default {
   isValidId,
-  hasCar
+  hasCar,
+  alreadyExists
 }
