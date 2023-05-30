@@ -1,10 +1,16 @@
 import assert from 'assert';
+import { v4 as uuidV4 } from 'uuid'
 import {
   validate,
   messageErrorInvalidByField,
   MINIMUM_YEAR
 } from '@validation/car';
+import {
+  validateId,
+  MESSAGE_ERROR_INVALID_ID
+} from '@validation/id';
 import { Car } from "@/types/car"
+
 const INVALID_STRING_VALUE = 123;
 
 describe('Validations individual fields', () => {
@@ -101,6 +107,22 @@ describe('Validations individual fields', () => {
     assert.deepStrictEqual(resultWithNumberLessThanMinimumYear, expectedWithNumberLessThanMinimumYear);
   });
 
+  it('Must return false when id is valid', () => {
+    const validId = uuidV4();
+    const result = validateId(validId);
+
+    assert.strictEqual(result, false);
+  });
+
+  it('Should return correct error message when id is invalid', () => {
+    const invalidId = '12345aaa';
+
+    assert.throws(() => validateId(invalidId), {
+      name: 'InvalidsFieldsError',
+      message: 'Invalid id',
+      fields: [{ field: 'id', message: MESSAGE_ERROR_INVALID_ID }]
+    });
+  });
 });
 
 const getObjectWithInvalidField = (field: keyof Omit<Car, 'id'>) => {
