@@ -4,6 +4,10 @@ import {
   InvalidsFieldsError
 } from "@/helpers/error"
 
+type MessageByField = {
+  [Property in keyof Car]: string
+}
+
 const requiredField = [
   'placa',
   'chassi',
@@ -11,6 +15,14 @@ const requiredField = [
   'marca',
   'ano'
 ] as const
+
+export const messageErrorInvalidByField = {
+  'placa': 'The field "placa" is invalid. Is only accepted letters and numbers and type string.',
+  'chassi': 'The field "chassi" must be a string.',
+  'modelo': 'The field "modelo" must be a string.',
+  'marca': 'The field "marca" is invalid. Is only accepted letters and type string.',
+  'ano': 'The field "ano" must be a number.'
+} as MessageByField
 
 export const validateDataCreateCar = (data: Omit<Car, 'id'>) => {
   const fieldsRequiredsNotInformed = requiredField.filter(field => !data[field])
@@ -23,7 +35,7 @@ export const validateDataCreateCar = (data: Omit<Car, 'id'>) => {
   }
 
   const fieldsInvalids = Object.entries(data).map(([field, value]) => {
-    return validate(field, value)
+    return validate(field as keyof Omit<Car, 'id'>, value)
   }).filter(Boolean)
 
   if(fieldsInvalids.length) {
@@ -34,63 +46,49 @@ export const validateDataCreateCar = (data: Omit<Car, 'id'>) => {
   }
 }
 
-const validate = (field: string, value: unknown) => {
+export const validate = (field: keyof Omit<Car, 'id'>, value: unknown) => {
   type ValidateFunctionType = {
     [key: string]: (value: unknown) => false | { field: string, message: string }
   }
 
   const validateFunctions = {
-    placa: () => {
-      if (typeof value !== 'string') {
-        return {
-          field,
-          message: 'The field "placa" must be a string'
-        }
-      }
-
+    placa: (value) => {
       const regex = /^[a-zA-Z0-9-]+$/;
-      if (!regex.test(value)) {
+      if (typeof value !== 'string' || !regex.test(value)) {
         return {
           field,
-          message: 'The field "placa" is invalid. Is only accepted letters and numbers'
+          message: messageErrorInvalidByField[field]
         }
       }
 
       return false
     },
-    chassi: () => {
+    chassi: (value) => {
       if (typeof value !== 'string') {
         return {
           field,
-          message: 'The field "chassi" must be a string'
+          message: messageErrorInvalidByField[field]
         }
       }
 
       return false
     },
-    modelo: () => {
+    modelo: (value) => {
       if (typeof value !== 'string') {
         return {
           field,
-          message: 'The field "modelo" must be a string'
+          message: messageErrorInvalidByField[field]
         }
       }
 
       return false
     },
-    marca: () => {
-      if (typeof value !== 'string') {
-        return {
-          field,
-          message: 'The field "marca" must be a string'
-        }
-      }
-
+    marca: (value) => {
       const regex = /^[a-zA-Z]+$/;
-      if (!regex.test(value)) {
+      if (typeof value !== 'string' || !regex.test(value)) {
         return {
           field,
-          message: 'The field "marca" is invalid. Is only accepted letters'
+          message: messageErrorInvalidByField[field]
         }
       }
 
@@ -100,7 +98,7 @@ const validate = (field: string, value: unknown) => {
       if (typeof value !== 'number') {
         return {
           field,
-          message: 'The field "ano" must be a number'
+          message: messageErrorInvalidByField[field]
         }
       }
 
