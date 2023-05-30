@@ -54,10 +54,19 @@ export async function deleteCar(id: string) {
   return true
 }
 
+export async function getByPlacaOrChassi(placa: string, chassi: string) {
+  const cars = Object.values(dbInMemory.cars)
+
+  const car = cars.find(car => car.placa === placa || car.chassi === chassi)
+
+  return car
+}
+
 export default {
   create,
   get,
   getAll,
   update,
-  deleteCar
+  deleteCar,
+  getByPlacaOrChassi
 }
