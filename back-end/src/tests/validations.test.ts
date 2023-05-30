@@ -1,7 +1,8 @@
 import assert from 'assert';
 import {
   validate,
-  messageErrorInvalidByField
+  messageErrorInvalidByField,
+  MINIMUM_YEAR
 } from '@validation/car';
 import { Car } from "@/types/car"
 const INVALID_STRING_VALUE = 123;
@@ -88,10 +89,16 @@ describe('Validations individual fields', () => {
 
   it('Should return correct error message when field ano is invalid', () => {
     const invalidAno = '2023';
-    const result = validate('ano', invalidAno);
-    const expected = getObjectWithInvalidField('ano');
+    const anoGreaterThanMinimumYear = MINIMUM_YEAR - 1;
 
-    assert.deepStrictEqual(result, expected);
+    const resultWithInvalidString = validate('ano', invalidAno);
+    const resultWithNumberLessThanMinimumYear = validate('ano', anoGreaterThanMinimumYear);
+
+    const expectedWithInvalidString = getObjectWithInvalidField('ano');
+    const expectedWithNumberLessThanMinimumYear = getObjectWithInvalidField('ano');
+
+    assert.deepStrictEqual(resultWithInvalidString, expectedWithInvalidString);
+    assert.deepStrictEqual(resultWithNumberLessThanMinimumYear, expectedWithNumberLessThanMinimumYear);
   });
 
 });
