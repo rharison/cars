@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx watch src",
     "build": "tsc --build ",
-    "test": "mocha --require ts-node/register -r tsconfig-paths/register src/tests/**/*.ts "
+    "test": "nyc --reporter=html --reporter=text mocha --require ts-node/register -r tsconfig-paths/register src/tests/**/*.ts"
   },
   "keywords": [],
   "author": "",
@@ -17,9 +17,11 @@
     "@types/mocha": "^10.0.1",
     "@types/node": "^20.2.5",
     "@types/uuid": "^9.0.1",
+    "coveralls": "^3.1.1",
     "i": "^0.3.7",
     "mocha": "^10.2.0",
     "npm": "^9.6.7",
+    "nyc": "^15.1.0",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^3.12.7",
