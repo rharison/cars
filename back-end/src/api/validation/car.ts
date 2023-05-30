@@ -8,6 +8,8 @@ type MessageByField = {
   [Property in keyof Car]: string
 }
 
+type Operations = 'create' | 'update'
+
 export const MINIMUM_YEAR = 1886
 
 const requiredField = [
@@ -26,14 +28,16 @@ export const messageErrorInvalidByField = {
   'ano': `The field "ano" must be a number and and must be greater than ${MINIMUM_YEAR}.`
 } as MessageByField
 
-export const validateDataCreateCar = (data: Omit<Car, 'id'>) => {
-  const fieldsRequiredsNotInformed = requiredField.filter(field => !data[field])
+export const validateDataCar = (data: Omit<Car, 'id'>, operation: Operations) => {
+  if(operation === 'create') {
+    const fieldsRequiredsNotInformed = requiredField.filter(field => !data[field])
 
-  if(fieldsRequiredsNotInformed.length) {
-    throw new RequiredFieldsError(
-      fieldsRequiredsNotInformed,
-      'These fields are mandatory for creating a new car'
-    )
+    if(fieldsRequiredsNotInformed.length) {
+      throw new RequiredFieldsError(
+        fieldsRequiredsNotInformed,
+        'These fields are mandatory for creating a new car'
+      )
+    }
   }
 
   const fieldsInvalids = Object.entries(data).map(([field, value]) => {
