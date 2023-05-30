@@ -17,6 +17,7 @@ carRoutes.get(
 
 carRoutes.post(
   '/cars',
+  CarMiddlewares.alreadyExists,
   CarControllers.create
 )
 
