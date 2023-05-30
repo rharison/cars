@@ -18,8 +18,8 @@ export async function create(req: Request, res: Response, next: NextFunction) {
 
 export async function get(req: Request, res: Response, next: NextFunction) {
   try {
-    const idCar = req.params.idCar
-    const car = await CarService.get(idCar)
+    const { id } = req.params
+    const car = await CarService.get(id)
 
     res.status(200).json(car)
   } catch (error: any) {
@@ -44,8 +44,8 @@ export async function getAll(req: Request, res: Response, next: NextFunction) {
 
 export async function update(req: Request, res: Response, next: NextFunction) {
   try {
-    const idCar = req.params.idCar
-    await CarService.update(idCar, req.body)
+    const { id } = req.params
+    await CarService.update(id, req.body)
 
     res.status(200).send('Car updated')
   } catch (error: any) {
@@ -60,8 +60,9 @@ export async function update(req: Request, res: Response, next: NextFunction) {
 
 export async function deleteCar(req: Request, res: Response, next: NextFunction) {
   try {
-    const idCar = req.params.idCar
-    await CarService.deleteCar(idCar)
+    const { id } = req.params
+
+    await CarService.deleteCar(id)
 
     res.status(200).send('Car deleted')
   } catch (error: any) {
