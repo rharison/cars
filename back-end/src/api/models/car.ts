@@ -27,16 +27,17 @@ export async function getAll() {
 }
 
 export async function update(id: string, data: Partial<Omit<Car, 'id'>>) {
-  const car = dbInMemory.cars[id]
-
-  if(!car) {
-    throw new Error('Car not found')
+  const oldDataCar = dbInMemory.cars[id]
+  const newDataCar = {
+    id,
+    placa: data.placa || oldDataCar.placa,
+    chassi: data.chassi || oldDataCar.chassi,
+    modelo: data.modelo || oldDataCar.modelo,
+    marca: data.marca || oldDataCar.marca,
+    ano: data.ano || oldDataCar.ano,
   }
 
-  const updatedCar = dbInMemory.cars[id] = {
-    ...car,
-    ...data
-  }
+  const updatedCar = dbInMemory.cars[id] = newDataCar
 
   return updatedCar
 }
