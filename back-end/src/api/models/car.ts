@@ -3,7 +3,12 @@ import { dbInMemory } from "./db";
 
 export async function create(car: Car) {
   const newCar = dbInMemory.cars[car.id] = {
-    ...car
+    id: car.id,
+    placa: car.placa,
+    chassi: car.chassi,
+    modelo: car.modelo,
+    marca: car.marca,
+    ano: car.ano,
   }
 
   return newCar
