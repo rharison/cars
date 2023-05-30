@@ -1,17 +1,38 @@
 import { Router } from 'express'
 import CarControllers from '@controllers/car'
+import CarMiddlewares from '@middlewares/car'
 
 const carRoutes = Router()
 
-carRoutes.get('/cars', CarControllers.getAll)
+carRoutes.get(
+  '/cars',
+  CarControllers.getAll
+)
 
-carRoutes.get('/cars/:idCar', CarControllers.get)
+carRoutes.get(
+  '/cars/:id',
+  CarMiddlewares.isValidId,
+  CarControllers.get
+)
 
-carRoutes.post('/cars', CarControllers.create)
+carRoutes.post(
+  '/cars',
+  CarControllers.create
+)
 
-carRoutes.put('/cars/:idCar', CarControllers.update)
+carRoutes.put(
+  '/cars/:id',
+  CarMiddlewares.isValidId,
+  CarMiddlewares.hasCar,
+  CarControllers.update
+)
 
-carRoutes.delete('/cars/:idCar', CarControllers.deleteCar)
+carRoutes.delete(
+  '/cars/:id',
+  CarMiddlewares.isValidId,
+  CarMiddlewares.hasCar,
+  CarControllers.deleteCar
+)
 
 export {
   carRoutes
