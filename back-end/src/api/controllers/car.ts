@@ -7,8 +7,13 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     const car = await CarService.create(req.body)
 
     res.status(201).json(car)
-  } catch (error) {
-    return next(error)
+  } catch (error: any) {
+    const { code, fields, message } = error
+
+    return res.status(code).json({
+      message,
+      fields
+    })
   }
 }
 
