@@ -1,9 +1,9 @@
 import { Car } from '@/types/car'
 import CarModel from '@models/car'
 import { validateDataCreateCar } from '@validation/car'
-import { validateId } from '@validation/id'
 import {
   NotFoundError,
+  DefaultError
 } from '@helpers/error'
 import { v4 as uuidV4 } from 'uuid'
 
@@ -17,8 +17,6 @@ export async function create(car: Car) {
 }
 
 export async function get(id: string) {
-  validateId(id)
-
   const car = await CarModel.get(id)
 
   if(!car) {
@@ -44,11 +42,26 @@ export async function deleteCar(id: string) {
   return await CarModel.deleteCar(id)
 }
 
+export async function getByPlacaOrChassi(placa: string, chassi: string) {
+  const car = await CarModel.getByPlacaOrChassi(placa, chassi)
+
+  if(car) {
+    throw new DefaultError({
+      name: 'AlreadExists',
+      message: 'Car already exists',
+      code: 400
+    })
+  }
+
+  return false
+}
+
 
 export default {
   create,
   get,
   getAll,
   update,
-  deleteCar
+  deleteCar,
+  getByPlacaOrChassi
 }
