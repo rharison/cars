@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express"
+import { Request, Response } from "express"
 import { handleErrorApi } from '@helpers/response'
 import CarService from '@services/car'
 
