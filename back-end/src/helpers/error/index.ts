@@ -5,7 +5,7 @@ type DefaultErrorInput = {
   fields?: string[] | FieldInvalid[]
 }
 
-type FieldInvalid = {
+export type FieldInvalid = {
   field: string
   message: string
 }
