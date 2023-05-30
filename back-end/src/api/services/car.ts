@@ -1,6 +1,10 @@
 import { Car } from '@/types/car'
 import CarModel from '@models/car'
 import { validateDataCreateCar } from '@validation/car'
+import { validateId } from '@validation/id'
+import {
+  NotFoundError,
+} from '@helpers/error'
 import { v4 as uuidV4 } from 'uuid'
 
 export async function create(car: Car) {
@@ -13,10 +17,12 @@ export async function create(car: Car) {
 }
 
 export async function get(id: string) {
+  validateId(id)
+
   const car = await CarModel.get(id)
 
   if(!car) {
-    throw new Error('Car not found')
+    throw new NotFoundError('Car not found')
   }
 
   return car
