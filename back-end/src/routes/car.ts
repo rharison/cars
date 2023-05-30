@@ -17,6 +17,7 @@ carRoutes.get(
 
 carRoutes.post(
   '/cars',
+  CarMiddlewares.validateBody,
   CarMiddlewares.alreadyExists,
   CarControllers.create
 )
@@ -25,6 +26,7 @@ carRoutes.put(
   '/cars/:id',
   CarMiddlewares.isValidId,
   CarMiddlewares.hasCar,
+  CarMiddlewares.validateBody,
   CarControllers.update
 )
 
