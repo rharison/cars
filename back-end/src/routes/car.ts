@@ -1,26 +1,17 @@
 import { Router } from 'express'
+import CarControllers from '@controllers/car'
 
 const carRoutes = Router()
 
-carRoutes.get('/cars', (req, res, next) => {
+carRoutes.get('/cars', CarControllers.getAll)
 
-})
+carRoutes.get('/cars/:idCar', CarControllers.get)
 
-carRoutes.get('/cars/:idCar', (req, res, next) => {
+carRoutes.post('/cars', CarControllers.create)
 
-})
+carRoutes.put('/cars/:idCar', CarControllers.update)
 
-carRoutes.post('/cars', (req, res, next) => {
-
-})
-
-carRoutes.put('/cars/:idCar', (req, res, next) => {
-
-})
-
-carRoutes.delete('/cars/:idCar', (req, res, next) => {
-
-})
+carRoutes.delete('/cars/:idCar', CarControllers.deleteCar)
 
 export {
   carRoutes
