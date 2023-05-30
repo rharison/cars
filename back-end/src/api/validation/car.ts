@@ -8,6 +8,8 @@ type MessageByField = {
   [Property in keyof Car]: string
 }
 
+export const MINIMUM_YEAR = 1886
+
 const requiredField = [
   'placa',
   'chassi',
@@ -21,7 +23,7 @@ export const messageErrorInvalidByField = {
   'chassi': 'The field "chassi" must be a string.',
   'modelo': 'The field "modelo" must be a string.',
   'marca': 'The field "marca" is invalid. Is only accepted letters and type string.',
-  'ano': 'The field "ano" must be a number.'
+  'ano': `The field "ano" must be a number and and must be greater than ${MINIMUM_YEAR}.`
 } as MessageByField
 
 export const validateDataCreateCar = (data: Omit<Car, 'id'>) => {
@@ -95,7 +97,7 @@ export const validate = (field: keyof Omit<Car, 'id'>, value: unknown) => {
       return false
     },
     ano: (value: unknown) => {
-      if (typeof value !== 'number') {
+      if (typeof value !== 'number' || value < MINIMUM_YEAR) {
         return {
           field,
           message: messageErrorInvalidByField[field]
