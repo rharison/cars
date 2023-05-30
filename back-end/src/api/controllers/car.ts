@@ -24,7 +24,7 @@ export async function get(req: Request, res: Response) {
   }
 }
 
-export async function getAll(req: Request, res: Response, next: NextFunction) {
+export async function getAll(req: Request, res: Response) {
   try {
     const cars = await CarService.getAll()
 
@@ -46,7 +46,7 @@ export async function update(req: Request, res: Response) {
   }
 }
 
-export async function deleteCar(req: Request, res: Response, next: NextFunction) {
+export async function deleteCar(req: Request, res: Response) {
   try {
     const { id } = req.params
 
