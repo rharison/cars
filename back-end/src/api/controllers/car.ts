@@ -58,7 +58,6 @@ export async function deleteCar(req: Request, res: Response, next: NextFunction)
   }
 }
 
-
 export default {
   create,
   get,

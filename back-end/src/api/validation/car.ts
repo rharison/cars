@@ -11,6 +11,7 @@ type MessageByField = {
 type Operations = 'create' | 'update'
 
 export const MINIMUM_YEAR = 1886
+export const MESSAGE_ERROR_REQUIRED_FIELD = 'These fields are mandatory for creating a new car'
 
 const requiredField = [
   'placa',
@@ -35,7 +36,7 @@ export const validateDataCar = (data: Omit<Car, 'id'>, operation: Operations) =>
     if(fieldsRequiredsNotInformed.length) {
       throw new RequiredFieldsError(
         fieldsRequiredsNotInformed,
-        'These fields are mandatory for creating a new car'
+        MESSAGE_ERROR_REQUIRED_FIELD
       )
     }
   }
@@ -50,6 +51,8 @@ export const validateDataCar = (data: Omit<Car, 'id'>, operation: Operations) =>
       'These fields are invalids'
     )
   }
+
+  return false
 }
 
 export const validate = (field: keyof Omit<Car, 'id'>, value: unknown) => {
