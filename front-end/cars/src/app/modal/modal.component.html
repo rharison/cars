@@ -10,3 +10,64 @@
     x
   </span>
 </header>
+<form [formGroup]="carForm" class="form">
+  <mat-form-field>
+    <mat-label>Placa</mat-label>
+    <input
+      matInput
+      placeholder="Ex. ABC-1234"
+      formControlName="placa"
+    >
+    <mat-error
+      *ngIf="
+        (getControls.placa.hasError('minlength') || getControls.placa.hasError('maxLength')) &&
+        !getControls.placa.hasError('required')
+      "
+    >
+      {{ messagesError.placa.invalid }}
+    </mat-error>
+    <mat-error *ngIf="getControls.placa.hasError('required')">
+      {{ messagesError.placa.required }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Chassi</mat-label>
+    <input
+      matInput
+      placeholder="Ex. 9BWZZZ377VT004251"
+      formControlName="chassi"
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Modelo</mat-label>
+    <input
+      matInput
+      placeholder="Ex. Gol"
+      formControlName="modelo"
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Marca</mat-label>
+    <input
+      matInput
+      placeholder="Ex. Volkswagen"
+      formControlName="marca"
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Ano</mat-label>
+    <input
+      matInput
+      placeholder="Ex. 2019"
+      formControlName="ano"
+      type="number"
+    >
+  </mat-form-field>
+  <button
+    class="form-button"
+    (click)="saveCar()"
+
+  >
+    Salvar
+  </button>
+</form>

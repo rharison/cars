@@ -6,20 +6,32 @@ import { FloatButtonComponent } from './float-button/float-button.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ModalComponent } from './modal/modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgIf } from '@angular/common';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     FloatButtonComponent,
-    ModalComponent
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    NgIf
   ],
-  providers: [],
+  providers: [
+
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
