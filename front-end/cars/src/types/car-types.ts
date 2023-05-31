@@ -3,6 +3,7 @@ export type Car = {
   placa: string;
   chassi: string;
   modelo: string;
+  marca: string;
   ano: number;
 }
 

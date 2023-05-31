@@ -34,9 +34,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatTableModule,
     MatIconModule
   ],
-  providers: [
-
-  ],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

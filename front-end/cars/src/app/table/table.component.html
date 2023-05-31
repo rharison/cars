@@ -19,6 +19,11 @@
     <td mat-cell *matCellDef="let element"> {{element.modelo}} </td>
   </ng-container>
 
+  <ng-container matColumnDef="marca">
+    <th mat-header-cell *matHeaderCellDef> Marca </th>
+    <td mat-cell *matCellDef="let element"> {{element.marca}} </td>
+  </ng-container>
+
   <ng-container matColumnDef="ano">
     <th mat-header-cell *matHeaderCellDef> Ano </th>
     <td mat-cell *matCellDef="let element"> {{element.ano}} </td>
@@ -35,7 +40,7 @@
           visibility
         </mat-icon>
         <mat-icon
-          (click)="handleAction('edit')"
+          (click)="handleAction('edit', element)"
           class="acoes-icon edit"
         >
           edit

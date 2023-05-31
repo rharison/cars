@@ -1,8 +1,10 @@
-import { Component, Inject, Type } from '@angular/core';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Validators, FormControl } from '@angular/forms'
-
+import { Validators } from '@angular/forms'
+import { Car } from '../../types/car-types';
+import CarService from '../../services/car/car-service';
+import { TableComponent } from '../table/table.component';
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
@@ -10,25 +12,24 @@ import { Validators, FormControl } from '@angular/forms'
 })
 
 export class ModalComponent {
+  car: Car | undefined = undefined;
+  carForm: any;
   constructor(
     private formBuild: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: {
-      action: 'new' | 'edit'
+      action: 'new' | 'edit' | 'visibility'
+      car?: Car
     },
-    private matDialogRef: MatDialogRef<ModalComponent>
+    private matDialogRef: MatDialogRef<TableComponent>
   ) {
-
+    this.car = data.car;
   }
 
   ngOnInit(): void {
     const {
-      action,
+      car
     } = this.data;
-    console.log(action);
-  }
-
-  ngOnDestroy(): void {
-    this.matDialogRef.close(this.data);
+    this.mountForm(car)
   }
 
   closeModal() {
@@ -36,7 +37,20 @@ export class ModalComponent {
   }
 
   saveCar() {
-    console.log('DATA', this.carForm.value)
+    if (this.carForm.invalid) return;
+
+    const body = {
+      car: this.carForm.value
+    }
+
+    if (this.data.action === 'new') {
+      CarService.createCar(body).then((car) => {
+        this.matDialogRef.close({
+          action: this.data.action,
+          car
+        });
+      });
+    }
   }
 
   messagesError = {
@@ -47,49 +61,52 @@ export class ModalComponent {
 
   }
 
-  carForm = this.formBuild.group({
-    placa: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(10),
+  mountForm(dataCar: Car | undefined) {
+    this.carForm = this.formBuild.group({
+      placa: [
+        dataCar?.placa || '',
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(10),
+        ]
+      ],
+      chassi: [
+        dataCar?.chassi || '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(255),
+        ]
+      ],
+      modelo: [
+        dataCar?.modelo || '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(255),
+        ]
+      ],
+      marca: [
+        dataCar?.marca || '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(255),
+        ]
+      ],
+      ano: [
+        dataCar?.ano || '',
+        [
+          Validators.required,
+          Validators.min(1886),
+          Validators.minLength(4),
+          Validators.maxLength(4),
+        ]
       ]
-    ],
-    chassi: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(255),
-      ]
-    ],
-    modelo: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(255),
-      ]
-    ],
-    marca: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(255),
-      ]
-    ],
-    ano: [
-      '',
-      [
-        Validators.required,
-        Validators.min(1886),
-        Validators.minLength(4),
-        Validators.maxLength(4),
-      ]
-    ]
-  });
+    });
+  }
+
 
 
   get getControls() {

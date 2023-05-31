@@ -13,7 +13,7 @@ export class FloatButtonComponent {
   }
 
   openModal(action: 'new' | 'edit') {
-    let dialogRef = this.matDialog.open(
+    this.matDialog.open(
       ModalComponent,
       {
         data: {
