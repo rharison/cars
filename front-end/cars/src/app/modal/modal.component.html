@@ -14,6 +14,7 @@
   <mat-form-field>
     <mat-label>Placa</mat-label>
     <input
+      class="form-input"
       matInput
       placeholder="Ex. ABC-1234"
       formControlName="placa"
@@ -30,33 +31,41 @@
       {{ messagesError.placa.required }}
     </mat-error>
   </mat-form-field>
+
   <mat-form-field>
     <mat-label>Chassi</mat-label>
     <input
+      class="form-input"
       matInput
       placeholder="Ex. 9BWZZZ377VT004251"
       formControlName="chassi"
     >
   </mat-form-field>
+
   <mat-form-field>
     <mat-label>Modelo</mat-label>
     <input
+      class="form-input"
       matInput
       placeholder="Ex. Gol"
       formControlName="modelo"
     >
   </mat-form-field>
+
   <mat-form-field>
     <mat-label>Marca</mat-label>
     <input
+      class="form-input"
       matInput
       placeholder="Ex. Volkswagen"
       formControlName="marca"
     >
   </mat-form-field>
+
   <mat-form-field>
     <mat-label>Ano</mat-label>
     <input
+      class="form-input"
       matInput
       placeholder="Ex. 2019"
       formControlName="ano"
@@ -66,7 +75,7 @@
   <button
     class="form-button"
     (click)="saveCar()"
-
+    [disabled]="carForm.invalid"
   >
     Salvar
   </button>

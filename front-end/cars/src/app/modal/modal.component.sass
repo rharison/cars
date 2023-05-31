@@ -49,6 +49,8 @@
     transition: all 0.2s ease-in-out
     &:hover:not(:disabled)
       background-color: #fd7e14
+    &:active:not(:disabled)
+      transform: scale(0.96)
     &:disabled
       background-image: linear-gradient(to right, #ccc, #ddd)
       color: gray

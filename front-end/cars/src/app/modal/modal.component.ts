@@ -49,17 +49,46 @@ export class ModalComponent {
 
   carForm = this.formBuild.group({
     placa: [
-      ,
+      '',
       [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(10),
       ]
     ],
-    chassi: [''],
-    modelo: [''],
-    marca: [''],
-    ano: ['']
+    chassi: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(255),
+      ]
+    ],
+    modelo: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(255),
+      ]
+    ],
+    marca: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(255),
+      ]
+    ],
+    ano: [
+      '',
+      [
+        Validators.required,
+        Validators.min(1886),
+        Validators.minLength(4),
+        Validators.maxLength(4),
+      ]
+    ]
   });
 
 
