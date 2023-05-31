@@ -6,9 +6,8 @@ export type Car = {
   ano: number;
 }
 
-export type CarBodyResponse = {
-  car: Car;
-}
+export type CarBodyResponse = Car;
+
 
 export type CarBodyCreate = {
   car: Omit<Car, 'id'>;

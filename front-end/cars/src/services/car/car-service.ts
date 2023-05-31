@@ -13,7 +13,7 @@ const axiosInstance = axios.create({
 });
 
 export async function getCars() {
-  const { data } = await axiosInstance.get<CarBodyResponse>("/cars");
+  const { data } = await axiosInstance.get<CarBodyResponse[]>("/cars");
 
   return data;
 }
