@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { NgIf } from '@angular/common';
 import { TableComponent } from './table/table.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { TableComponent } from './table/table.component';
     MatFormFieldModule,
     NgIf,
     MatTableModule,
+    MatIconModule
   ],
   providers: [
 

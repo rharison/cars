@@ -13,7 +13,7 @@ const carsData: CarBodyResponse[] = []
 
 export class TableComponent {
   carsData: CarBodyResponse[] | undefined;
-  displayedColumns: string[] = ['placa', 'chassi', 'modelo', 'ano'];
+  displayedColumns: string[] = ['placa', 'chassi', 'modelo', 'ano', 'ações'];
   dataSource: any
 
   applyFilter(event: Event) {
@@ -26,6 +26,22 @@ export class TableComponent {
     CarService.getCars().then((cars) => {
       this.dataSource = new MatTableDataSource(cars);
     });
+  }
+
+  handleAction(action: string, car?: CarBodyResponse) {
+    switch (action) {
+      case 'visibility':
+        console.log('visibility')
+        break;
+      case 'edit':
+        console.log('edit')
+        break;
+      case 'delete':
+        console.log('delete')
+        break;
+      default:
+        break;
+    }
   }
 
   ngOnInit() {
