@@ -1,0 +1,12 @@
+<header class="modal-header">
+  <span class="modal-header-title">
+    {{ data.action === 'new' ? 'New car' : 'Edit car' }}
+  </span>
+  <div class="modal-header-separator"></div>
+  <span
+    class="modal-header-close"
+    (click)="closeModal()"
+  >
+    x
+  </span>
+</header>

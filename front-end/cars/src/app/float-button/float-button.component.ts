@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-float-button',
@@ -6,5 +8,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./float-button.component.sass'],
 })
 export class FloatButtonComponent {
+  constructor(private matDialog: MatDialog) {
 
+  }
+
+  openModal(action: 'new' | 'edit') {
+    let dialogRef = this.matDialog.open(
+      ModalComponent,
+      {
+        data: {
+          action,
+        },
+        width: '500px',
+        height: '500px'
+      }
+    )
+  }
 }
