@@ -4,6 +4,7 @@ import CarService from '../../services/car/car-service';
 import { Car } from 'src/types/car-types';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
+import { ModalConfirmationComponent } from '../modal-confirmation/modal-confirmation.component';
 
 @Component({
   selector: 'app-table',
@@ -66,6 +67,15 @@ export class TableComponent {
         break;
       case 'delete':
         console.log('delete')
+        this.matDialog.open(
+          ModalConfirmationComponent,
+          {
+            data: {
+              message: 'Deseja realmente excluir este carro?'
+            },
+            width: '500px',
+          }
+        );
         break;
       default:
         break;

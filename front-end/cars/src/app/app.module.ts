@@ -13,6 +13,7 @@ import { MatTableModule } from '@angular/material/table';
 import { NgIf } from '@angular/common';
 import { TableComponent } from './table/table.component';
 import { MatIconModule } from '@angular/material/icon';
+import { ModalConfirmationComponent } from './modal-confirmation/modal-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
     FloatButtonComponent,
     ModalComponent,
     TableComponent,
+    ModalConfirmationComponent,
   ],
   imports: [
     BrowserModule,
