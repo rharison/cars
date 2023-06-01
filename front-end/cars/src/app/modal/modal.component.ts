@@ -6,6 +6,7 @@ import { Car } from '../../types/car-types';
 import CarService from '../../services/car/car-service';
 import { TableComponent } from '../table/table.component';
 import { ModalConfirmationComponent } from '../modal-confirmation/modal-confirmation.component';
+import { getMessageError } from 'src/util/error';
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
@@ -73,20 +74,18 @@ export class ModalComponent {
     if (this.data.action === 'new') {
       CarService.createCar(body).then((car) => {
         this.handleClose('new', car)
-      }).catch(() => {
-        this.openModalError(
-          'Oops, ocorreu um erro ao tentar criar o carro, tente novamente mais tarde.'
-        )
+      }).catch((error) => {
+        const message = getMessageError(error)
+        this.openModalError(message)
       })
     }
 
     if (this.data.action === 'edit') {
       CarService.updateCar(id, body).then(() => {
         this.handleClose('new', body.car)
-      }).catch(() => {
-        this.openModalError(
-          'Oops, ocorreu um erro ao tentar atualizar o carro, tente novamente mais tarde.'
-        )
+      }).catch((error) => {
+        const message = getMessageError(error)
+        this.openModalError(message)
       })
     }
   }

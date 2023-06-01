@@ -34,18 +34,24 @@
     <td mat-cell *matCellDef="let element">
       <div class="container-acoes-list">
         <mat-icon
+          matTooltip="Detalhes do carro"
+          matTooltipPosition="left"
           (click)="handleAction('visibility', element)"
           class="acoes-icon visibility"
         >
           visibility
         </mat-icon>
         <mat-icon
+          matTooltip="Editar carro"
+          matTooltipPosition="left"
           (click)="handleAction('edit', element)"
           class="acoes-icon edit"
         >
           edit
         </mat-icon>
         <mat-icon
+          matTooltip="Excluir carro"
+          matTooltipPosition="left"
           (click)="handleAction('delete', element)"
           class="acoes-icon delete"
         >

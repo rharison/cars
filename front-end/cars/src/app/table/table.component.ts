@@ -5,6 +5,7 @@ import { Car } from 'src/types/car-types';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
 import { ModalConfirmationComponent } from '../modal-confirmation/modal-confirmation.component';
+import { getMessageError } from '../../util/error';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -46,10 +47,9 @@ export class TableComponent {
   public RenderTable() {
     CarService.getCars().then((cars) => {
       this.dataSource = new MatTableDataSource(cars);
-    }).catch(() => {
-      this.openModalError(
-        'Oops, ocorreu um erro ao tentar buscar os carros, tente novamente mais tarde.'
-      )
+    }).catch((error) => {
+      const message = getMessageError(error)
+      this.openModalError(message)
     })
   }
 
@@ -60,7 +60,7 @@ export class TableComponent {
 
         const findCar = await this.getCarById(car.id)
 
-        if (!findCar) return;
+        if (!findCar) return
 
         this.openModal('visibility', findCar)
         break;
@@ -81,14 +81,12 @@ export class TableComponent {
 
         refDialogConfirm.afterClosed().subscribe(async (isConfirmed) => {
           if (!isConfirmed) return
-          try {
-            await CarService.deleteCar(car.id)
+          CarService.deleteCar(car.id).then(() => {
             this.RenderTable()
-          } catch {
-            this.openModalError(
-              'Oops, ocorreu um erro ao tentar excluir o carro, tente novamente mais tarde.'
-            )
-          }
+          }).catch((error) => {
+            const message = getMessageError(error)
+            this.openModalError(message)
+          })
         });
         break;
       default:
@@ -110,15 +108,12 @@ export class TableComponent {
   }
 
   async getCarById(id: string) {
-    try {
-      const car = await CarService.getCarById(id)
-
+    return CarService.getCarById(id).then((car) => {
       return car
-    } catch {
-      return this.openModalError(
-        'Oops, ocorreu um erro ao tentar buscar o carro, tente novamente mais tarde.'
-      )
-    }
+    }).catch((error) => {
+      const message = getMessageError(error)
+      return this.openModalError(message)
+    })
   }
 
   openModalError(message: string) {
