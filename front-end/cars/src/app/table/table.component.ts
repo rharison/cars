@@ -46,7 +46,7 @@ export class TableComponent {
   handleAction(action: string, car?: Car) {
     switch (action) {
       case 'visibility':
-        this.openModal('visibility')
+        this.openModal('visibility', car)
         break;
       case 'edit':
         this.openModal('edit', car)

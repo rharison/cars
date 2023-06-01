@@ -12,8 +12,10 @@ import { TableComponent } from '../table/table.component';
 })
 
 export class ModalComponent {
+  titleModal: string = 'Novo Carro';
   car: Car | undefined = undefined;
   carForm: any;
+  isVisibility: boolean = false;
   constructor(
     private formBuild: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: {
@@ -23,6 +25,14 @@ export class ModalComponent {
     private matDialogRef: MatDialogRef<TableComponent>
   ) {
     this.car = data.car;
+    if(data.action === 'edit') {
+      this.titleModal = 'Editar Carro'
+    }
+
+    if(data.action === 'visibility') {
+      this.titleModal = 'Visualizar Carro'
+      this.isVisibility = true
+    }
   }
 
   ngOnInit(): void {
@@ -37,7 +47,14 @@ export class ModalComponent {
   }
 
   saveCar() {
+    if (this.data.action === 'visibility') {
+      this.matDialogRef.close();
+
+      return
+    }
+
     if (this.carForm.invalid) return;
+
     let id;
 
     const cloneCardForm = JSON.parse(JSON.stringify(this.carForm.value))
@@ -71,7 +88,7 @@ export class ModalComponent {
   }
 
   handleClose(
-    action: 'new' | 'edit' | 'visibility',
+    action: 'new' | 'edit',
     car: Car | undefined = undefined
   ) {
     this.matDialogRef.close({
