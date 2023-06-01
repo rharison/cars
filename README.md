@@ -13,6 +13,7 @@ Projeto para controle de carros, nele você consegue cadastrar, editar, excluir 
 * O banco de dados está em memória.
 
 * Neste repositório estão todas as partes do projeto (monorepo), api (back-end) e front-end.
+* Este foi o primeiro projeto que fiz utilizando o framework Angular no front-end, foi um experiência muito boa e de aprendizados.
 
 ## Como iniciar a aplicação
 
@@ -40,13 +41,13 @@ Projeto para controle de carros, nele você consegue cadastrar, editar, excluir 
 ```json
 
 {
-	"car": {
-		"placa": "ABC-123",
-		"chassi": "AAABBBCCCDDD",
-		"modelo": "Uno",
-		"marca": "Fiat",
-		"ano": 2020
-	}
+  "car": {
+    "placa": "ABC-123",
+    "chassi": "AAABBBCCCDDD",
+    "modelo": "Uno",
+    "marca": "Fiat",
+    "ano": 2020
+  }
 }
 
 ```
@@ -128,21 +129,21 @@ Objeto car
 
 ## Demonstração
 
-Insira um gif ou um link de alguma demonstração
+Screenshots da aplicação front-end
 
 
 ## Screenshots
 
-![App Screenshot](https://media.discordapp.net/attachments/1044691984260010016/1047183122661388328/image.png?width=1242&height=632)
+![App Screenshot](https://media.discordapp.net/attachments/1044691984260010016/1113898686632701986/1.jpg?width=1238&height=612)
 
-![App Screenshot](https://media.discordapp.net/attachments/1044691984260010016/1047184310416986162/image.png?width=1440&height=355)
+![App Screenshot](https://media.discordapp.net/attachments/1044691984260010016/1113898686892757083/2.jpg?width=878&height=430)
 
-![App Screenshot](https://media.discordapp.net/attachments/1044691984260010016/1047184731256651776/image.png?width=1287&height=632)
+![App Screenshot](https://media.discordapp.net/attachments/1044691984260010016/1113898687115047053/3.jpg?width=880&height=430)
 
-![App Screenshot](https://media.discordapp.net/attachments/1044691984260010016/1047185705018867722/Screenshot_20221129_131443.jpg?width=311&height=632)
+![App Screenshot](https://media.discordapp.net/attachments/1044691984260010016/1113898687505125406/4.jpg?width=873&height=430)
 
-![App Screenshot](https://media.discordapp.net/attachments/1044691984260010016/1047185975463391282/image.png)
+![App Screenshot](https://media.discordapp.net/attachments/1044691984260010016/1113898687752573019/5.jpg?width=871&height=430)
 
-![App Screenshot](https://media.discordapp.net/attachments/1044691984260010016/1047185316706013214/Screenshot_20221129_131548.jpg?width=311&height=632)
+![App Screenshot](https://media.discordapp.net/attachments/1044691984260010016/1113898687966490724/6.jpg?width=869&height=430)
 
-![App Screenshot](https://media.discordapp.net/attachments/1044691984260010016/1047185315829391410/Screenshot_20221129_131611.jpg?width=311&height=632)
+![App Screenshot](https://media.discordapp.net/attachments/1044691984260010016/1113898688318820432/7.jpg?width=873&height=430)
