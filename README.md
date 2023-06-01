@@ -35,7 +35,7 @@ Projeto de controle de cadastro de carros, nele você consegue cadastrar, editar
 
 | Parâmetro | Tipo          | Descrição                                      |
 | :-------- | :------------ | :--------------------------------------------- |
-| `id`      | `string (uuid)` | **Obrigatório**. O ID do carro que você quer |
+| `id`      | `string (uuid)` | **Obrigatório**. O ID do carro |
 
 
 #### Cadastrar um novo carro
@@ -57,64 +57,29 @@ Objeto car
 | `marca`      | `string` | **Obrigatório**. Marca do carro |
 | `ano`      | `number` | **Obrigatório**. Ano do carro |
 
-#### Cadastra um novo pedido
+
+#### Alterar dado(s) de um carro
 
 ```http
-  POST /orders
+  PUT /cars/:id
+```
+
+| Parâmetro | Tipo          | Descrição                                      |
+| :-------- | :------------ | :--------------------------------------------- |
+| `id`      | `string (uuid)` | **Obrigatório**. O ID do carro que você quer alterar |
+| `car`      | `Object` | **Obrigatório**. Dados do carro |
+
+- Dentro do objeto car você irá passar o(s) dado(s) que você deseja alterar.
+
+#### Deletar um carro
+
+```http
+  DELETE /cars/:id
 ```
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `mesa`      | `string` | **Obrigatório**. Identificação da mesa |
-| `products`      | `Array<object>` | **Obrigatório**. Produtos do pedido |
-
-Objeto products
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `product`      | `string` | **Obrigatório**. Id do produto |
-| `quantity`      | `string` | **Obrigatório**. Quantidade |
-
-#### Validar credenciais
-
-```http
-  POST /login
-```
-
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `e-mail`      | `string` | **Obrigatório**. E-mail do usuário |
-| `password`      | `string` | **Obrigatório**. Senha do usuaŕio |
-
-#### Validar JWT Token
-
-```http
-  POST /token
-```
-
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `token`      | `string` | **Obrigatório**. Token JWT |
-
-#### Alterar status de um pedido
-
-```http
-  PATCH /orders/:orderId
-```
-
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `orderId`      | `string` | **Obrigatório**. Id do pedido |
-| `status`      | `string` | **Obrigatório**. enum(WAITING, IN_PRODUCTION, DONE) |
-
-#### Deletar um pedido
-
-```http
-  DELETE /orders/:orderId
-```
-
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `orderId`      | `string` | **Obrigatório**. Id do pedido |
+| `id`      | `string (uuid)` | **Obrigatório**. O ID do carro que você quer alterar |
 
 
 
