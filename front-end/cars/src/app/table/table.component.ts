@@ -31,8 +31,8 @@ export class TableComponent {
     'ano',
     'ações'
   ];
-  dataSource: any
-  hasCars: boolean = false
+  dataSource: any = null
+  hasDataCar: boolean = false
 
   ngOnInit() {
     this.RenderTable()
@@ -47,6 +47,7 @@ export class TableComponent {
   public RenderTable() {
     CarService.getCars().then((cars) => {
       this.dataSource = new MatTableDataSource(cars);
+      this.hasDataCar = cars.length > 0
     }).catch((error) => {
       const message = getMessageError(error)
       this.openModalError(message)
