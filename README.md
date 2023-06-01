@@ -1,25 +1,62 @@
 
 # Cars Control - Controle de carros
 
-Projeto de controle de cadastro de carros, nele você consegue cadastrar, editar, excluir e listar veículos. A seguir a lsita de técnologias utilizadas:
+Projeto para controle de carros, nele você consegue cadastrar, editar, excluir e listar veículos. A seguir a lsita de técnologias utilizadas:
 
 * Typescript;
-* NodeJS
-* Express
-* Mocha
-* Chai
-* Angular
-* Sass
+* NodeJS;
+* Express;
+* Mocha;
+* Chai;
+* Angular;
+* Sass;
+* O banco de dados está em memória.
 
 * Neste repositório estão todas as partes do projeto (monorepo), api (back-end) e front-end.
 
+## Como iniciar a aplicação
+
+* Clone o projeto;
+* Entre na pasta do projeto de terminal;
+
+#### Iniciando o Back-end
+  * Para iniciar o back-end, primeiro acesse a pasta back-end dentro da pasta principal do projeto;
+  * Execute 'npm install' ou o comando de instalar de seu gerenciador de pacotes;
+  * Crie um arquivo .env na raiz do projeto, seguindo as especificações do arquivo .env.example que também está na raiz do projeto.
+  * Para iniciar o back-end execute 'npm run dev', ou execute o script 'dev' com seu gerenciador de pacotes;
+  * Para rodas os testes execute 'npm run test', ou execute o script 'test' com seu gerenciador de pacotes;
+  * O projeto estará rodando na posta definida no arquivo .env ou na porta padrão que é a 3000.
+
+#### Iniciando o Front-end
+  * Para iniciar o front-end, primeiro acesse a pasta front-end dentro da pasta principal do projeto;
+  * Execute 'npm install' ou o comando de instalar de seu gerenciador de pacotes;
+  * Para iniciar o front-end execute 'npm start', ou execute o script 'start' com seu gerenciador de pacotes;
+  * O projeto estará rodando na posta padrao do Angular que é a 4200 ou irá mostrar no output do console qual é a porta.
+
 ## Documentação da API
 
-#### Retorna todas as categorias
+#### Exemplo de objeto para cadastrar/editar carro:
 
-```http
-  GET /categories
-```
+{
+	"car": {
+		"placa": "ABC-123",
+		"chassi": "AAABBBCCCDDD",
+		"modelo": "Uno",
+		"marca": "Fiat",
+		"ano": 2020
+	}
+}
+
+#### Exemplo de objeto para de retorno ao cadastrar um novo carro:
+
+{
+  "placa": "ABC-123",
+  "chassi": "AAABBBCCCDDD",
+  "modelo": "Uno",
+  "marca": "Fiat",
+  "ano": 2020
+ }
+
 
 #### Retorna todos os carros
 
