@@ -37,6 +37,8 @@ Projeto para controle de carros, nele você consegue cadastrar, editar, excluir 
 
 #### Exemplo de objeto para cadastrar/editar carro:
 
+```json
+
 {
 	"car": {
 		"placa": "ABC-123",
@@ -47,8 +49,11 @@ Projeto para controle de carros, nele você consegue cadastrar, editar, excluir 
 	}
 }
 
+```
+
 #### Exemplo de objeto para de retorno ao cadastrar um novo carro:
 
+```json
 {
   "placa": "ABC-123",
   "chassi": "AAABBBCCCDDD",
@@ -56,6 +61,7 @@ Projeto para controle de carros, nele você consegue cadastrar, editar, excluir 
   "marca": "Fiat",
   "ano": 2020
  }
+```
 
 
 #### Retorna todos os carros
