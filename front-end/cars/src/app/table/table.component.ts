@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import CarService from '../../services/car/car-service';
-import { CarBodyResponse, Car } from 'src/types/car-types';
+import { Car } from 'src/types/car-types';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
 
@@ -23,7 +23,14 @@ export class TableComponent {
     })
   }
 
-  displayedColumns: string[] = ['placa', 'chassi', 'modelo', 'marca', 'ano', 'ações'];
+  displayedColumns: string[] = [
+    'placa',
+    'chassi',
+    'modelo',
+    'marca',
+    'ano',
+    'ações'
+  ];
   dataSource: any
   hasCars: boolean = false
 
@@ -43,10 +50,16 @@ export class TableComponent {
     });
   }
 
-  handleAction(action: string, car?: Car) {
+  async handleAction(action: string, car?: Car) {
     switch (action) {
       case 'visibility':
-        this.openModal('visibility', car)
+        if(!car?.id) return
+
+        const findCar = await this.getCarById(car.id)
+
+        if(!findCar) return;
+
+        this.openModal('visibility', findCar)
         break;
       case 'edit':
         this.openModal('edit', car)
@@ -60,7 +73,7 @@ export class TableComponent {
   }
 
   openModal(action: 'new' | 'edit' | 'visibility', car?: Car) {
-    let dialogInstance = this.matDialog.open(
+    this.matDialog.open(
       ModalComponent,
       {
         data: {
@@ -70,5 +83,17 @@ export class TableComponent {
         width: '500px',
       }
     )
+  }
+
+  async getCarById(id: string) {
+    try {
+      const car = await CarService.getCarById(id)
+
+      return car
+    } catch (error) {
+      console.log(error)
+
+      return null
+    }
   }
 }
