@@ -38,7 +38,7 @@ Projeto de controle de cadastro de carros, nele você consegue cadastrar, editar
 | `id`      | `string (uuid)` | **Obrigatório**. O ID do carro que você quer |
 
 
-#### Cadastra um novo carro
+#### Cadastrar um novo carro
 
 ```http
   POST /cars
@@ -46,29 +46,16 @@ Projeto de controle de cadastro de carros, nele você consegue cadastrar, editar
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `name`      | `string` | **Obrigatório**. Nome da categoria |
-| `icon`      | `string` | **Obrigatório**. Ícone da categoria (Emoji) |
+| `car`      | `Object` | **Obrigatório**. Dados do carro |
 
-#### Cadastra um novo produto
-
-```http
-  POST /products
-```
-
+Objeto car
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `name`      | `string` | **Obrigatório**. Nome do produto |
-| `description`      | `string` | **Obrigatório**. Descrição do produto |
-| `price`      | `number` | **Obrigatório**. Preço do produto (Em centavos) |
-| `ingredients`      | `Array<object>` | Igredientes do produto |
-| `category`      | `string` | **Obrigatório**. Id da categoria |
-| `image`      | `blob` | **Obrigatório**. Imagem do produto |
-
-Objeto ingredients
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `name`      | `string` | **Obrigatório**. Nome do ingrediente |
-| `icon`      | `string` | **Obrigatório**. Icone do ingrediente (Emoji) |
+| `placa`      | `string` | **Obrigatório**. Placa do carro |
+| `chassi`      | `string` | **Obrigatório**. Chassi do carro |
+| `modelo`      | `string` | **Obrigatório**. Modelo do carro |
+| `marca`      | `string` | **Obrigatório**. Marca do carro |
+| `ano`      | `number` | **Obrigatório**. Ano do carro |
 
 #### Cadastra um novo pedido
 
