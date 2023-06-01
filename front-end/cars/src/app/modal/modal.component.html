@@ -7,7 +7,13 @@
     x
   </span>
 </header>
+
 <form [formGroup]="carForm" class="form">
+  <mat-form-field *ngIf="!!getControls?.id">
+    <mat-label>Id</mat-label>
+    <input class="form-input" readonly matInput formControlName="id">
+  </mat-form-field>
+
   <mat-form-field>
     <mat-label>Placa</mat-label>
     <input class="form-input" matInput placeholder="Ex. ABC-1234" formControlName="placa">

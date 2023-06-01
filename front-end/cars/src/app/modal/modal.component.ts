@@ -78,6 +78,7 @@ export class ModalComponent {
 
   mountForm(dataCar: Car | undefined) {
     this.carForm = this.formBuild.group({
+      ...(dataCar?.id && { id: [dataCar.id] }),
       placa: [
         dataCar?.placa || '',
         [
