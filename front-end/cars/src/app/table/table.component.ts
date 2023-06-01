@@ -5,19 +5,17 @@ import { Car } from 'src/types/car-types';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
 import { ModalConfirmationComponent } from '../modal-confirmation/modal-confirmation.component';
-
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.sass']
 })
 
-
 export class TableComponent {
   constructor(private matDialog: MatDialog) {
     matDialog.afterOpened.subscribe((matDialogRef) => {
       matDialogRef.afterClosed().subscribe((data) => {
-        if(data) {
+        if (data) {
           this.RenderTable()
         }
       })
@@ -48,17 +46,21 @@ export class TableComponent {
   public RenderTable() {
     CarService.getCars().then((cars) => {
       this.dataSource = new MatTableDataSource(cars);
-    });
+    }).catch(() => {
+      this.openModalError(
+        'Oops, ocorreu um erro ao tentar buscar os carros, tente novamente mais tarde.'
+      )
+    })
   }
 
   async handleAction(action: string, car?: Car) {
     switch (action) {
       case 'visibility':
-        if(!car?.id) return
+        if (!car?.id) return
 
         const findCar = await this.getCarById(car.id)
 
-        if(!findCar) return;
+        if (!findCar) return;
 
         this.openModal('visibility', findCar)
         break;
@@ -66,8 +68,8 @@ export class TableComponent {
         this.openModal('edit', car)
         break;
       case 'delete':
-        console.log('delete')
-        this.matDialog.open(
+        if (!car?.id) return
+        const refDialogConfirm = this.matDialog.open(
           ModalConfirmationComponent,
           {
             data: {
@@ -76,6 +78,18 @@ export class TableComponent {
             width: '500px',
           }
         );
+
+        refDialogConfirm.afterClosed().subscribe(async (isConfirmed) => {
+          if (!isConfirmed) return
+          try {
+            await CarService.deleteCar(car.id)
+            this.RenderTable()
+          } catch {
+            this.openModalError(
+              'Oops, ocorreu um erro ao tentar excluir o carro, tente novamente mais tarde.'
+            )
+          }
+        });
         break;
       default:
         break;
@@ -100,10 +114,23 @@ export class TableComponent {
       const car = await CarService.getCarById(id)
 
       return car
-    } catch (error) {
-      console.log(error)
-
-      return null
+    } catch {
+      return this.openModalError(
+        'Oops, ocorreu um erro ao tentar buscar o carro, tente novamente mais tarde.'
+      )
     }
+  }
+
+  openModalError(message: string) {
+    this.matDialog.open(
+      ModalConfirmationComponent,
+      {
+        data: {
+          message,
+          isError: true
+        },
+        width: '500px',
+      }
+    )
   }
 }

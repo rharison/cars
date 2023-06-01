@@ -1,10 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Validators } from '@angular/forms'
 import { Car } from '../../types/car-types';
 import CarService from '../../services/car/car-service';
 import { TableComponent } from '../table/table.component';
+import { ModalConfirmationComponent } from '../modal-confirmation/modal-confirmation.component';
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
@@ -22,7 +23,8 @@ export class ModalComponent {
       action: 'new' | 'edit' | 'visibility'
       car?: Car
     },
-    private matDialogRef: MatDialogRef<TableComponent>
+    private matDialogRef: MatDialogRef<TableComponent>,
+    private matDialog: MatDialog
   ) {
     this.car = data.car;
     if(data.action === 'edit') {
@@ -69,22 +71,24 @@ export class ModalComponent {
     }
 
     if (this.data.action === 'new') {
-
       CarService.createCar(body).then((car) => {
         this.handleClose('new', car)
-      }).catch((err) => {
-        console.log(err)
+      }).catch(() => {
+        this.openModalError(
+          'Oops, ocorreu um erro ao tentar criar o carro, tente novamente mais tarde.'
+        )
       })
     }
 
     if (this.data.action === 'edit') {
       CarService.updateCar(id, body).then(() => {
         this.handleClose('new', body.car)
-      }).catch((err) => {
-        console.log(err)
+      }).catch(() => {
+        this.openModalError(
+          'Oops, ocorreu um erro ao tentar atualizar o carro, tente novamente mais tarde.'
+        )
       })
     }
-
   }
 
   handleClose(
@@ -167,9 +171,21 @@ export class ModalComponent {
     });
   }
 
-
   get getControls() {
     return this.carForm.controls;
+  }
+
+  openModalError(message: string) {
+    this.matDialog.open(
+      ModalConfirmationComponent,
+      {
+        data: {
+          message,
+          isError: true
+        },
+        width: '500px',
+      }
+    )
   }
 }
 

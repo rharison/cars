@@ -34,8 +34,8 @@ export async function updateCar(id: string, body: CarBodyUpdate) {
   await axiosInstance.put(`/cars/${id}`, body);
 }
 
-export async function deleteCar() {
-  await axiosInstance.delete("/cars");
+export async function deleteCar(id: string) {
+  await axiosInstance.delete(`/cars/${id}`);
 }
 
 export default {

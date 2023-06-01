@@ -9,12 +9,19 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 export class ModalConfirmationComponent {
   message: string = ''
+  isError = false
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {
-      message: string
+      message: string,
+      isError: boolean
     },
     private matDialogRef: MatDialogRef<Component>
   ) {
     this.message = data.message
+    this.isError = data.isError
+  }
+
+  handleClick(isConfirmed: boolean) {
+    this.matDialogRef.close(isConfirmed)
   }
 }

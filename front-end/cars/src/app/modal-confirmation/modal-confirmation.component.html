@@ -1,12 +1,16 @@
 <div class="container-modal">
-  <mat-icon class="modal-icon" >warning_amber</mat-icon>
-  <span class="modal-message" >{{ message }}</span>
+  <mat-icon class="modal-icon">warning_amber</mat-icon>
+  <span class="modal-message">{{ message }}</span>
   <div class="modal-container-buttons">
-    <button class="modal-button cancell">
-      Cancelar
-    </button>
-    <button class="modal-button confirm">
+    <button
+      class="modal-button confirm"
+      (click)="handleClick(true)"
+      *ngIf="!isError"
+    >
       Excluir
+    </button>
+    <button class="modal-button cancell" (click)="handleClick(false)">
+      {{ isError ? 'Fechar' : 'Cancelar' }}
     </button>
   </div>
 </div>
