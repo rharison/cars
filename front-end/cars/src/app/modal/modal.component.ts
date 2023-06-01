@@ -38,19 +38,46 @@ export class ModalComponent {
 
   saveCar() {
     if (this.carForm.invalid) return;
+    let id;
+
+    const cloneCardForm = JSON.parse(JSON.stringify(this.carForm.value))
+
+    if(cloneCardForm.id) {
+      id = cloneCardForm.id
+      delete cloneCardForm.id
+    }
 
     const body = {
-      car: this.carForm.value
+      car: cloneCardForm
     }
 
     if (this.data.action === 'new') {
+
       CarService.createCar(body).then((car) => {
-        this.matDialogRef.close({
-          action: this.data.action,
-          car
-        });
-      });
+        this.handleClose('new', car)
+      }).catch((err) => {
+        console.log(err)
+      })
     }
+
+    if (this.data.action === 'edit') {
+      CarService.updateCar(id, body).then(() => {
+        this.handleClose('new', body.car)
+      }).catch((err) => {
+        console.log(err)
+      })
+    }
+
+  }
+
+  handleClose(
+    action: 'new' | 'edit' | 'visibility',
+    car: Car | undefined = undefined
+  ) {
+    this.matDialogRef.close({
+      action,
+      car
+    });
   }
 
   messagesError = {
@@ -122,7 +149,6 @@ export class ModalComponent {
       ]
     });
   }
-
 
 
   get getControls() {

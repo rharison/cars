@@ -30,8 +30,8 @@ export async function createCar(body: CarBodyCreate) {
   return data;
 }
 
-export async function updateCar(body: CarBodyUpdate) {
-  await axiosInstance.put("/cars", body);
+export async function updateCar(id: string, body: CarBodyUpdate) {
+  await axiosInstance.put(`/cars/${id}`, body);
 }
 
 export async function deleteCar() {
