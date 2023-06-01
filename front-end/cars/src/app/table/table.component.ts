@@ -23,9 +23,9 @@ export class TableComponent {
     })
   }
 
-  carsData: CarBodyResponse[] | undefined;
   displayedColumns: string[] = ['placa', 'chassi', 'modelo', 'marca', 'ano', 'ações'];
   dataSource: any
+  hasCars: boolean = false
 
   ngOnInit() {
     this.RenderTable()

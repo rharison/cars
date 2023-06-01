@@ -57,8 +57,23 @@ export class ModalComponent {
     placa: {
       required: 'Placa é obrigatório.',
       invalid: 'Placa inválida, deve ter entre 5 e 10 caracteres.',
-    }
-
+    },
+    chassi: {
+      required: 'Chassi é obrigatório.',
+      invalid: 'Chassi inválido, apenas letras e números, mín. 3 caracteres.',
+    },
+    modelo: {
+      required: 'Modelo é obrigatório.',
+      invalid: 'Modelo inválido, apenas letras e números, mín. 3 caracteres.',
+    },
+    marca: {
+      required: 'Marca é obrigatório.',
+      invalid: 'Marca inválida, apenas letras e números, mín. 3 caracteres.',
+    },
+    ano: {
+      required: 'Ano é obrigatório.',
+      invalid: 'Ano inválido, dever ser maior que 1886 e ter 4 caracteres.',
+    },
   }
 
   mountForm(dataCar: Car | undefined) {

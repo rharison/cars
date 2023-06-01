@@ -3,28 +3,18 @@
     {{ data.action === 'new' ? 'New car' : 'Edit car' }}
   </span>
   <div class="modal-header-separator"></div>
-  <span
-    class="modal-header-close"
-    (click)="closeModal()"
-  >
+  <span class="modal-header-close" (click)="closeModal()">
     x
   </span>
 </header>
 <form [formGroup]="carForm" class="form">
   <mat-form-field>
     <mat-label>Placa</mat-label>
-    <input
-      class="form-input"
-      matInput
-      placeholder="Ex. ABC-1234"
-      formControlName="placa"
-    >
-    <mat-error
-      *ngIf="
+    <input class="form-input" matInput placeholder="Ex. ABC-1234" formControlName="placa">
+    <mat-error *ngIf="
         (getControls.placa.hasError('minlength') || getControls.placa.hasError('maxLength')) &&
         !getControls.placa.hasError('required')
-      "
-    >
+      ">
       {{ messagesError.placa.invalid }}
     </mat-error>
     <mat-error *ngIf="getControls.placa.hasError('required')">
@@ -34,49 +24,60 @@
 
   <mat-form-field>
     <mat-label>Chassi</mat-label>
-    <input
-      class="form-input"
-      matInput
-      placeholder="Ex. 9BWZZZ377VT004251"
-      formControlName="chassi"
-    >
+    <input class="form-input" matInput placeholder="Ex. 9BWZZZ377VT004251" formControlName="chassi">
+    <mat-error *ngIf="
+      (getControls.chassi.hasError('minlength') || getControls.chassi.hasError('maxLength')) &&
+      !getControls.chassi.hasError('required')
+    ">
+      {{ messagesError.chassi.invalid }}
+    </mat-error>
+    <mat-error *ngIf="getControls.chassi.hasError('required')">
+      {{ messagesError.chassi.required }}
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Modelo</mat-label>
-    <input
-      class="form-input"
-      matInput
-      placeholder="Ex. Gol"
-      formControlName="modelo"
-    >
+    <input class="form-input" matInput placeholder="Ex. Gol" formControlName="modelo">
+    <mat-error *ngIf="
+      (getControls.modelo.hasError('minlength') || getControls.modelo.hasError('maxLength')) &&
+      !getControls.modelo.hasError('required')
+    ">
+      {{ messagesError.modelo.invalid }}
+    </mat-error>
+    <mat-error *ngIf="getControls.modelo.hasError('required')">
+      {{ messagesError.modelo.required }}
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Marca</mat-label>
-    <input
-      class="form-input"
-      matInput
-      placeholder="Ex. Volkswagen"
-      formControlName="marca"
-    >
+    <input class="form-input" matInput placeholder="Ex. Volkswagen" formControlName="marca">
+    <mat-error *ngIf="
+      (getControls.marca.hasError('minlength') || getControls.marca.hasError('maxLength')) &&
+      !getControls.marca.hasError('required')
+    ">
+      {{ messagesError.marca.invalid }}
+    </mat-error>
+    <mat-error *ngIf="getControls.marca.hasError('required')">
+      {{ messagesError.marca.required }}
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Ano</mat-label>
-    <input
-      class="form-input"
-      matInput
-      placeholder="Ex. 2019"
-      formControlName="ano"
-      type="number"
-    >
+    <input class="form-input" matInput placeholder="Ex. 2019" formControlName="ano" type="number">
+    <mat-error *ngIf="
+      (getControls.ano.hasError('minlength') || getControls.ano.hasError('maxLength')) &&
+      !getControls.ano.hasError('required')
+    ">
+      {{ messagesError.ano.invalid }}
+    </mat-error>
+    <mat-error *ngIf="getControls.ano.hasError('required')">
+      {{ messagesError.ano.required }}
+    </mat-error>
   </mat-form-field>
-  <button
-    class="form-button"
-    (click)="saveCar()"
-    [disabled]="carForm.invalid"
-  >
+  <button class="form-button" (click)="saveCar()" [disabled]="carForm.invalid">
     Salvar
   </button>
 </form>
