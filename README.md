@@ -12,6 +12,8 @@ Projeto para controle de carros, nele você consegue cadastrar, editar, excluir 
 * Sass;
 * O banco de dados está em memória.
 
+
+
 * Neste repositório estão todas as partes do projeto (monorepo), api (back-end) e front-end.
 * Este foi o primeiro projeto que fiz utilizando o framework Angular no front-end, foi um experiência muito boa e de aprendizados.
 
