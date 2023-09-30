@@ -1,38 +1,43 @@
 {
-  "name": "back-end",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "tsx watch src",
-    "build": "tsc --build ",
-    "test": "nyc --reporter=html --reporter=text mocha --require ts-node/register -r tsconfig-paths/register src/tests/**/*.ts"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/cors": "^2.8.13",
-    "@types/express": "^4.17.17",
-    "@types/mocha": "^10.0.1",
-    "@types/node": "^20.2.5",
-    "@types/uuid": "^9.0.1",
-    "coveralls": "^3.1.1",
-    "i": "^0.3.7",
-    "mocha": "^10.2.0",
-    "npm": "^9.6.7",
-    "nyc": "^15.1.0",
-    "ts-node": "^10.9.1",
-    "tsconfig-paths": "^4.2.0",
-    "tsx": "^3.12.7",
-    "typescript": "^5.0.4"
-  },
-  "dependencies": {
-    "chai": "^4.3.7",
-    "chai-http": "^4.3.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "uuid": "^9.0.0"
-  }
+    "name": "back-end",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "engines": {
+        "node": "18"
+    },
+    "scripts": {
+        "dev": "tsx watch src",
+        "build": "tsup src",
+        "start": "node dist/index.js",
+        "test": "nyc --reporter=html --reporter=text mocha --require ts-node/register -r tsconfig-paths/register src/tests/**/*.ts"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/cors": "^2.8.13",
+        "@types/express": "^4.17.17",
+        "@types/mocha": "^10.0.1",
+        "@types/node": "^20.2.5",
+        "@types/uuid": "^9.0.1",
+        "coveralls": "^3.1.1",
+        "i": "^0.3.7",
+        "mocha": "^10.2.0",
+        "npm": "^9.6.7",
+        "nyc": "^15.1.0",
+        "ts-node": "^10.9.1",
+        "tsconfig-paths": "^4.2.0",
+        "tsup": "^7.2.0",
+        "tsx": "^3.12.7",
+        "typescript": "^5.0.4"
+    },
+    "dependencies": {
+        "chai": "^4.3.7",
+        "chai-http": "^4.3.0",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "uuid": "^9.0.0"
+    }
 }
