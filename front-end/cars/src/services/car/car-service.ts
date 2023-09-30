@@ -6,7 +6,7 @@ import {
 } from "src/types/car-types";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3333",
+  baseURL: "https://cars-control-xyc9.onrender.com",
   headers: {
     "content-type": "application/json",
   },
